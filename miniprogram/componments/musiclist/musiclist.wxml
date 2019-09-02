@@ -1,0 +1,14 @@
+<block wx:for="{{musiclist}}" wx:key="id">
+  <view class="musiclist-container {{item.id === playingId ? 'playing' : ''}}" data-musicId="{{item.id}}" bindtap="onSelect">
+    <view class="musiclist-index">{{index+1}}</view>
+    <view class="musiclist-info">
+      <view class="musiclist-name">
+        {{item.name}}
+        <!-- 显示歌曲名字并判断是否有别名 -->
+        <text class="musiclist-alia">{{item.alia.length==0?"":item.alia[0]}}</text>
+      </view>
+      <!-- 歌手以及专辑 -->
+      <view class="musiclist-singer">{{item.ar[0].name}} - {{item.al.name}}</view>
+    </view>
+  </view>
+</block>

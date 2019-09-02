@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "q-playlist": "/componments/playlist/playlist"
+  },
+  "enablePullDownRefresh": true
+}

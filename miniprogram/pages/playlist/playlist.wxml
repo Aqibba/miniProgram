@@ -1,0 +1,13 @@
+<!-- 轮播 -->
+<swiper indicator-dots="true" indicator-color="rgba(105, 105, 105, .5)" indicator-active-color="rgba(255, 255, 255, 1)" autoplay="true" interval="3000" duration="1000">
+  <block wx:for="{{swiperImageUrls}}" wx:key="url">
+    <swiper-item>
+      <image src="{{item.url}}" mode="widthFix" class="img"></image>
+    </swiper-item>
+  </block>
+</swiper>
+<view class="palylist-container">
+	<block wx:for="{{playlist}}" wx:key="_id">
+		<q-playlist playlist="{{item}}"></q-playlist>
+	</block>
+</view>
