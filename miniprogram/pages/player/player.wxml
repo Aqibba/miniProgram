@@ -1,10 +1,10 @@
-<view class="player-container"></view>
+<view class="player-container" style="background:url({{picUrl}}) center/cover no-repeat"></view>
 <view class="player-mask"></view>
 
 <view class="player-info">
   <!-- 封面信息 -->
   <view class="player-disc">
-    <image class="player-img rotation"></image>
+    <image class="player-img" src="{{picUrl}}"></image>
   </view>
 
   <!-- 歌词 -->
@@ -14,9 +14,8 @@
 
   <!-- 控制面板 -->
   <view class="control">
-    <text class="iconfont icon-shangyishoushangyige"></text>
-    <text class="iconfont"></text>
-    <text class="iconfont icon-xiayigexiayishou"></text>
+    <text class="iconfont icon-icon-1"></text>
+    <text class="iconfont icon-bofang"></text>
+    <text class="iconfont icon-icon-"></text>
   </view>
-
 </view>

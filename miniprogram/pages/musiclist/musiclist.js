@@ -34,10 +34,17 @@ Page({
           name: list.name
         }
       })
+      this._setMusiclist()
       wx.hideLoading()
     }).catch((err) => {
       console.log(err)
     })
+  },
+
+  // 将获取到的歌单信息存储到本地的storage中
+
+  _setMusiclist() {
+    wx.setStorageSync('musiclist', this.data.musiclist)
   },
 
   /**

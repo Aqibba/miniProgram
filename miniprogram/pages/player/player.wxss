@@ -67,7 +67,7 @@
 
 .control {
   position: absolute;
-  bottom: 8%;
+  bottom: 15%;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
@@ -78,13 +78,13 @@
   color: #fefefe;
 }
 
-.icon-shangyishoushangyige, .icon-xiayigexiayishou {
+.icon-icon-1, .icon-icon- {
   font-size: 80rpx;
 }
 
-.icon-bofang1, .icon-zanting1 {
+.icon-bofang, .icon-zanting {
   font-size: 120rpx;
-  margin: 0 50rpx;
+  margin: 0 80rpx;
 }
 
 .rotation {

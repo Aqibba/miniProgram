@@ -21,12 +21,13 @@ Component({
     onSelect(e) {
       // 事件源 事件处理函数 事件对象 事件类型
       const musicId = e.currentTarget.dataset.musicid
+      const index = e.currentTarget.dataset.index
       console.log(musicId)
       this.setData({
         playingId: musicId
       })
       wx.navigateTo({
-        url: `../../pages/player/player?musicId=${musicId}`,
+        url: `../../pages/player/player?musicId=${musicId}&index=${index}`,
       })
 		}
   }
