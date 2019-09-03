@@ -1,3 +1,5 @@
 {
-  "usingComponents": {}
+  "usingComponents": {
+    "q-progress": "/componments/progress-bar/progress"
+  }
 }

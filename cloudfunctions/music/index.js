@@ -12,7 +12,7 @@ cloud.init()
 exports.main = async (event, context) => {
   // 
   const app = new tcbRouter({event})
-  // 设置 playlist 中间件
+  // 设置 playlist 中间件路由
   app.router('playlist', async(ctx, next) => {
     // 获取当前数据库并找到playlist集合
     ctx.body = await cloud.database().collection('playlist')
@@ -28,13 +28,22 @@ exports.main = async (event, context) => {
         console.log(err)
       })
   })
-
+	// 设置 musiclist 中间件路由
   app.router('musiclist', async(ctx, next) => {
     ctx.body = await rp(BASE_URL + '/playlist/detail?id=' + parseInt(event.id))
     .then((res) => {
       return JSON.parse(res)
     })
   })
-  
+  // 设置歌曲播放的中间件路由
+	app.router('musicUrl', async(ctx, next) => {
+		ctx.body = await rp(BASE_URL + `/song/url?id=${event.musicId}`)
+		.then((res) => {
+			return res
+		}).catch(err => {
+			console.log(err)
+		})
+	})
+	
   return app.serve()
 }
