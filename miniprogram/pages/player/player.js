@@ -15,7 +15,10 @@ Page({
    */
   data: {
     picUrl: '',
-    isPlaying: false
+    // 当前是否正在播放
+    isPlaying: false,
+    // 当前歌词是否显示
+    showLyric: false
   },
 
   /**
@@ -81,6 +84,14 @@ Page({
     }).catch(err => {
       console.log(err)
     })
+  },
+
+  /**
+   * 当前歌曲的歌词
+   */
+
+  showLyric() {
+
   },
 
   // 正在播放

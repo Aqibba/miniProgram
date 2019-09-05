@@ -21,7 +21,7 @@
 	},
 	"appid": "wxe0bad8ff0ba2c765",
 	"projectname": "wx_music",
-	"libVersion": "2.8.0",
+	"libVersion": "2.8.1",
 	"simulatorType": "wechat",
 	"simulatorPluginLibVersion": {},
 	"compileType": "miniprogram",
@@ -54,7 +54,7 @@
 					"id": 1,
 					"name": "musiclist",
 					"pathName": "pages/musiclist/musiclist",
-					"query": "id=35678877",
+					"query": "id=979321026",
 					"scene": null
 				}
 			]
