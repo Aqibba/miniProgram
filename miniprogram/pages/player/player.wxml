@@ -3,12 +3,12 @@
 
 <view class="player-info">
   <!-- 封面信息 -->
-  <view class="player-disc {{isPlaying ? 'play' : ''}}" bindtap="showLyric" hidden="{{showLyric}}">
+  <view class="player-disc {{isPlaying ? 'play' : ''}}" bindtap="showLyric" hidden="{{isShowLyric}}">
     <image class="player-img rotation  {{isPlaying ? '' : 'rotation-paused'}}" src="{{picUrl}}"></image>
   </view>
 
   <!-- 歌词 -->
-  <q-lyric showLyric="{{!showLyric}}" />
+  <q-lyric isShowLyric="{{!isShowLyric}}" bindtap="showLyric" lyric="{{lyric}}" />
   <!-- 进度条 -->
   <view class="progress-bar">
     <!-- 绑定子组件传出的音乐播放完成事件 -->

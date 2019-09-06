@@ -18,7 +18,9 @@ Page({
     // 当前是否正在播放
     isPlaying: false,
     // 当前歌词是否显示
-    showLyric: false
+    isShowLyric: false,
+    // 初始歌词
+    lyric: ''
   },
 
   /**
@@ -84,6 +86,27 @@ Page({
     }).catch(err => {
       console.log(err)
     })
+
+    // 加载当前歌曲的歌词
+    wx.cloud.callFunction({
+      name: 'music',
+      data: {
+        $url:'lyric',
+        musicId
+      }
+    }).then((res) => {
+      console.log(res)
+      let lyric = '暂无歌词提供'
+      let lrc = JSON.parse(res.result).lrc
+      if (lrc) {
+        lyric = lrc.lyric
+      }
+      this.setData({
+        lyric
+      })
+    }).catch(err => {
+      console.log(err)
+    })
   },
 
   /**
@@ -91,7 +114,10 @@ Page({
    */
 
   showLyric() {
-
+    this.setData({
+      // 当点击了歌曲封面时候就进行封面和歌词中间的切换，也就是让 isShowLyric 取反
+      isShowLyric: !this.data.isShowLyric
+    })
   },
 
   // 正在播放
