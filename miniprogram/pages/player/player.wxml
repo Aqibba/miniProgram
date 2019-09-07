@@ -8,11 +8,11 @@
   </view>
 
   <!-- 歌词 -->
-  <q-lyric isShowLyric="{{!isShowLyric}}" bindtap="showLyric" lyric="{{lyric}}" />
+  <q-lyric class="lyric" isShowLyric="{{!isShowLyric}}" bindtap="showLyric" lyric="{{lyric}}" />
   <!-- 进度条 -->
   <view class="progress-bar">
     <!-- 绑定子组件传出的音乐播放完成事件 -->
-    <q-progress bind:musicEnd="onNext" />
+    <q-progress bind:musicEnd="onNext" bind:timeUpdate="timeUpdate" bind:musicPlay="onPlay" bind:musicPause="onPause" isSame="{{isSame}}" />
   </view>
 
   <!-- 控制面板 -->

@@ -15,7 +15,7 @@ Component({
    * 组件的属性列表
    */
   properties: {
-
+    isSame: Boolean
   },
 
   /**
@@ -32,6 +32,9 @@ Component({
 
   lifetimes: {
     ready() {
+      if (this.properties.isSame && this.data.showTime.totalTime == "00:00") {
+        this._setTime()
+      }
       this._getMovableDis()
       this._bindBGMEvents()
     },
@@ -151,6 +154,11 @@ Component({
               progress: currentTime / duration * 100,
             })
           currentSeconds = currentTime.toString().split('.')[0]
+
+          // 联动歌词，让歌词和歌曲的进度一样
+          this.triggerEvent('timeUpdate', {
+            currentTime
+          })
           }
         }        
       })

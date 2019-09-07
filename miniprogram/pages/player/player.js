@@ -8,6 +8,8 @@ let nowPlayingIndex = 0
 // 获取全局唯一的背景音频管理器
 const audioManager = wx.getBackgroundAudioManager()
 
+const app = getApp()
+
 Page({
 
   /**
@@ -20,7 +22,9 @@ Page({
     // 当前歌词是否显示
     isShowLyric: false,
     // 初始歌词
-    lyric: ''
+    lyric: '',
+    // 是否为同一首歌曲
+    isSame: false,
   },
 
   /**
@@ -36,12 +40,33 @@ Page({
     this._loadMusicDetail(options.musicId)
   },
 
+  // 将子组件--进度条--中获得的时间传递到子组件--歌词显示--中
+  timeUpdate(e) {
+    this.selectComponent('.lyric').update(e.detail.currentTime)
+  },
+
   /**
    * 加载当前的歌曲数据
    */
   _loadMusicDetail(musicId) {
-    // 暂停正在播放的歌曲
-    audioManager.stop()
+
+    // 判断当前点击的歌曲是否是同一首歌曲
+    if (musicId === app.getPlayingMusicId()) {
+      this.setData({
+        isSame: true
+      })
+    }else {
+      this.setData({
+        isSame: false
+      })
+    }
+
+    // 如果当前惦记的歌曲不是同一首歌才停止播放 
+    if (!this.data.isSame) {
+      // 暂停正在播放的歌曲
+      audioManager.stop()
+    }
+
     let music = musiclist[nowPlayingIndex]
     // console.log(music.id)
     // 更改歌曲名
@@ -56,6 +81,8 @@ Page({
       isPlaying: false
     })
 		
+    app.setPlayingMusicId(musicId)
+
     wx.showLoading({
       title: '玩命加载中...',
     })
@@ -69,15 +96,28 @@ Page({
     }).then((res) => {
       // console.log(res)
       let result = JSON.parse(res.result)
-      // 歌曲播放地址
-      audioManager.src = result.data[0].url
-      audioManager.title = music.name
-      // 海报
-      audioManager.coverImgUrl = music.al.picUrl
-      // 歌手
-      audioManager.singer = music.ar[0].name
-      // 歌曲名
-      audioManager.epname = music.al.name
+
+      // VIP歌曲播放权限设置
+      if (result.data[0].url == null) {
+        wx.showToast({
+          title: '未获得当前歌曲播放权限',
+        })
+        return
+      }
+ 
+      // 如果不是同一首歌曲
+      if (!this.data.isSame) {
+        // 歌曲播放地址
+        audioManager.src = result.data[0].url
+        audioManager.title = music.name
+        // 海报
+        audioManager.coverImgUrl = music.al.picUrl
+        // 歌手
+        audioManager.singer = music.ar[0].name
+        // 歌曲名
+        audioManager.epname = music.al.name
+      }
+
       // 当播放地址/海报/歌手 全部存在时, 调用isPlaying函数开始播放音乐
       this.setData({
         isPlaying: true
@@ -95,7 +135,7 @@ Page({
         musicId
       }
     }).then((res) => {
-      console.log(res)
+      // console.log(res)
       let lyric = '暂无歌词提供'
       let lrc = JSON.parse(res.result).lrc
       if (lrc) {
