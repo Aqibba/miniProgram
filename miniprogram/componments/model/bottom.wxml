@@ -1,0 +1,7 @@
+<view class="model" hidden="{{!modelShow}}">
+  <view class="panel">
+    <i class="iconfont icon-shanchu" bindtap="onClose"></i>
+    <!-- 插槽 -->
+    <slot name="login"></slot>
+  </view>
+</view>

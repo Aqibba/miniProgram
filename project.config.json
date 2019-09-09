@@ -42,7 +42,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 1,
+			"current": 2,
 			"list": [
 				{
 					"id": -1,
@@ -54,6 +54,13 @@
 					"id": 1,
 					"name": "musiclist",
 					"pathName": "pages/musiclist/musiclist",
+					"query": "id=979321026",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/blog/blog",
+					"pathName": "pages/blog/blog",
 					"query": "id=979321026",
 					"scene": null
 				}

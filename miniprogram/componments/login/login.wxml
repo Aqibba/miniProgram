@@ -1,0 +1,5 @@
+<q-model modelShow="{{modelShow}}">
+  <view slot="login">
+    <button class="login" open-type="getUserInfo" bindgetuserinfo="getInfo">获取微信授权信息</button>
+  </view>
+</q-model>

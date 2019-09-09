@@ -5,7 +5,48 @@ Page({
    * 页面的初始数据
    */
   data: {
+    // 控制底部弹出层是否显示
+    modelShow: false
+  },
 
+  // 发布功能
+  onPublish() {
+    // 判断用户是否授权
+    wx.getSetting({
+      success: (res) => {
+        // console.log(res)
+        // 如果用户同意授权
+        if (res.authSetting['scope.userInfo']) {
+          wx.getUserInfo({
+            success: (res) => {
+              // console.log(res)
+              this.agree({
+                detail: res.userInfo
+              })
+            }
+          })
+        } else {
+          this.setData({
+            modelShow: true
+          })
+        }
+      }
+    })
+  },
+
+  agree(e) {
+    // console.log(e)
+    const detail = e.detail
+    wx.navigateTo({
+      url: `../blog-edit/blogEdit?nickName=${detail.nickName}&avatarUrl=${detail.avatarUrl}`,
+    })
+  },
+
+  disagree() {
+    wx.showModal({
+      title: '未授权...',
+      content: '',
+    })
   },
 
   /**

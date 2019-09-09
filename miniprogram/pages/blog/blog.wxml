@@ -1,2 +1,16 @@
-<!--pages/blog/blog.wxml-->
-<text>pages/blog/blog.wxml</text>
+<view class="container">
+  <!-- 头部 -->
+  <view class="header">
+    <view class="publish-container" bindtap="onPublish">
+      <i class="iconfont icon-fabubiaoshu"></i>
+    </view>
+    <!-- 搜索 -->
+    <view class="search-container">
+      <q-search />
+    </view>
+  </view>
+  <!-- 底部弹出层 -->
+  <q-login modelShow="{{modelShow}}" bind:agree="agree" bind:disagree="disagree">
+    
+  </q-login>
+</view>
