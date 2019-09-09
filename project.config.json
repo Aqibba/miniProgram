@@ -42,7 +42,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 2,
+			"current": 3,
 			"list": [
 				{
 					"id": -1,
@@ -62,6 +62,13 @@
 					"name": "pages/blog/blog",
 					"pathName": "pages/blog/blog",
 					"query": "id=979321026",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/blog-edit/blogEdit",
+					"pathName": "pages/blog-edit/blogEdit",
+					"query": "nickName=\"大怪！\"& avatarUrl= \"https://wx.qlogo.cn/mmopen/vi_32/mtNLaz0EVdY6pFbpi…bPWWFId6yfibRHYHibLy1G0v9Sk6VGayoo9KrueqB0xOA/132\"",
 					"scene": null
 				}
 			]

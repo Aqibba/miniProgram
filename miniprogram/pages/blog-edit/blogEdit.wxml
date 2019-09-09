@@ -1,2 +1,21 @@
-<!--pages/blog-edit/blogEdit.wxml-->
-<text>pages/blog-edit/blogEdit.wxml</text>
+<view class="container">
+  <textarea class="content" placeholder="你的分享..." bindinput="onInput" maxlength="140" auto-focus bindfocus="onFocus" bindblur="onBlur"></textarea>
+  <view class="image-list">
+    <!-- 显示图片 -->
+    <block wx:for="{{images}}" wx:key="*this">
+      <view class="image-wrap">
+        <image class="image" src="{{item}}" mode="aspectFill" bindtap="onPreview" data-imgsrc="item"></image>
+        <i class="iconfont icon-quxiao" bindtap="onDelete"></i>
+      </view>
+    </block>
+    <!-- 选择图片 -->
+    <view class="image-wrap selectphoto" hidden="{{!selectPhoto}}" bindtap="chooseImage">
+      <i class="iconfont icon-tianjiajiahaowubiankuang" data-index="{{index}}"></i>
+    </view>
+  </view>
+</view>
+
+<view class="footer" style="bottom:{{bottom}}px">
+  <text class="words-num">{{words}}/140</text>
+  <button class="send-btn">发布</button>
+</view>
