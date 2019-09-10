@@ -1,0 +1,7 @@
+{
+  "component": true,
+  "usingComponents": {
+    "q-login": "/componments/login/login",
+    "q-model": "/componments/model/bottom"
+  }
+}

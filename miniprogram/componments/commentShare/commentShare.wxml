@@ -1,0 +1,20 @@
+<view class="ctrl">
+  <view class="ctrl-item" bind:tap="onComment">
+    <i class="iconfont icon-pinglun icon"></i>
+    <text>评论</text>
+  </view>
+  <view class="ctrl-item share">
+    <button class="share-btn">
+      <i class="iconfont icon-iconfontfenxiang icon"></i>
+      <text>分享</text>
+    </button>
+  </view>
+</view>
+
+<q-login modelShow="{{login}}" bind:agree="onAgree" bind:disagree="onDisagree" />
+<q-model modelShow="{{modelShow}}">
+  <view slot="model-content">
+    <textarea name="content" class="comment-content" placeholder="评论..." value="{{content}}" fixed="true" auto-focus bindinput="onInput"></textarea>
+    <button class="send" bindtap="onSend">发送</button>
+  </view>
+</q-model>

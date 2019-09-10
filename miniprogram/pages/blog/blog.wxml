@@ -4,10 +4,19 @@
     <view class="publish-container" bindtap="onPublish">
       <i class="iconfont icon-fabubiaoshu"></i>
     </view>
-    <!-- 搜索 -->
+    <!-- 广场 -->
     <view class="search-container">
-      <q-search />
+      <view class="square">广场</view>
     </view>
+  </view>
+  <!-- blog列表 -->
+  <view class="blog-list">
+    <block wx:for="{{blogList}}" wx:key="_id">
+      <view class="blog-panel">
+        <q-card blog="{{item}}" bindtap="comment" data-blogid="{{item._id}}" />
+        <q-ctrl blogId="{{item._id}}" />
+      </view>
+    </block>
   </view>
   <!-- 底部弹出层 -->
   <q-login modelShow="{{modelShow}}" bind:agree="agree" bind:disagree="disagree">

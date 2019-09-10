@@ -5,7 +5,8 @@
     "pages/mine/mine",
     "pages/musiclist/musiclist",
     "pages/player/player",
-    "pages/blog-edit/blogEdit"
+    "pages/blog-edit/blogEdit",
+    "pages/blog-details/blog-details"
   ],
   "requiredBackgroundModes": [
     "audio"
@@ -30,8 +31,8 @@
       {
         "pagePath": "pages/blog/blog",
         "text": "发现",
-        "iconPath": "images/blog.png",
-        "selectedIconPath": "images/blog-active.png"
+        "iconPath": "images/find.png",
+        "selectedIconPath": "images/find-active.png"
       },
       {
         "pagePath": "pages/mine/mine",

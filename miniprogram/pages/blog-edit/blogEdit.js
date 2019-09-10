@@ -5,6 +5,14 @@ const MAX_WORDS = 140
 // 最多上传图片张数
 const MAX_IMAGE = 9
 
+// 输入的内容
+let content = ''
+
+// 用户信息
+let userInfo = {}
+
+// 初始化数据库
+const db = wx.cloud.database()
 
 Page({
 
@@ -24,6 +32,7 @@ Page({
    */
   onLoad: function (options) {
     // console.log(options)
+    userInfo = options
   },
 
   // 输入框输入
@@ -36,6 +45,9 @@ Page({
     this.setData({
       words
     })
+    // 获取用户输入的内容
+    content = e.detail.value
+    // console.log(content)
   },
 
   // 获取焦点
@@ -99,6 +111,93 @@ Page({
     wx.previewImage({
       urls: this.data.images,
       current: e.target.dataset.imgsrc
+    })
+  },
+
+  // 将用户发布的文字内容，图片fileId，用户昵称，用户头像，上传时间存储在云数据库中
+  send() {
+    // 判断用户的如数内容是否为空
+    if (content.trim() === '') {
+      wx.showModal({
+        title: '请输入内容',
+        content: '',
+      })
+      return
+    }
+
+    wx.showLoading({
+      title: '正在发布...',
+      // 当现实showLoading时不允许用户有其他操作
+      mask: true
+    })
+
+    // 保存每次上传的数据
+    let arr = []
+    // 上传的图片的fileID
+    let fileIds = []
+    // 循环遍历要上传的图片，上传全部（小程序商户餐云存储每次只能上传一个）
+    for (let i = 0; i < this.data.images.length; i++) {
+      let p = new Promise((reslove, retect) => {
+        // 上传文件的地址
+        let item = this.data.images[i]
+        // console.log(item)
+        // 获取上传的图片文件的扩展名
+        let j = /\.\w+$/.exec(item)[0]
+        // console.log(j)
+        // 图片上传到云存储
+        wx.cloud.uploadFile({
+          cloudPath: 'blog-Images/' + Date.now() + Math.random() * 1000 + j,
+          filePath: item,
+          success: (res) => {
+            // console.log(res)
+            // console.log(res.fileID)
+            fileIds = fileIds.concat(res.fileID)
+            reslove()
+          },
+          fail: (err) => {
+            console.log(err)
+            retect()
+          }
+        })
+      })
+      // console.log("定点测试===========================")
+      arr.push(p)
+      // console.log(arr.push(p))
+      // console.log("定点测试===========================")
+    }
+    // 将数据存储到云数据库中
+    Promise.all(arr).then((res) => {
+      // 存储的集合和数据
+      db.collection('blog').add({
+        data: {
+          ...userInfo,
+          content,
+          img: fileIds,
+          // 获取服务端的时间
+          createTime: db.serverDate(), 
+        }
+      }).then((res) => {
+        wx.hideLoading()
+        wx.showToast({
+          title: '发布成功',
+        })
+
+        // 返回页面并刷新
+        wx.navigateBack()
+        const pages = getCurrentPages()
+        console.log(pages)
+        // 取到上一个页面
+        const prevPage = pages[pages.length - 2]
+        prevPage.onPullDownRefresh()
+      }).catch(err => {
+        console.log(err)
+      })
+    }).catch(err => {
+      console.log(err)
+      wx.hideLoading()
+      wx.showToast({
+        title: '发布失败...',
+      })
     })
   },
 

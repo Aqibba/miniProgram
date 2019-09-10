@@ -1,7 +1,7 @@
 .header {
   display: flex;
   align-items: center;
-  padding: 0 20rpx;
+  padding: 0 50rpx;
   background-color: #fff;
   height: 100rpx;
   position: fixed;
@@ -26,4 +26,21 @@
 
 .search-container {
   flex: 1;
+  position: relative;
+}
+
+.square {
+  font-size: 32rpx;
+  line-height: 0;
+  position: absolute;
+  left: 40%;
+}
+
+.blog-list {
+  margin-top: 120rpx;
+}
+
+.blog-panel {
+  margin-bottom: 20rpx;
+  box-sizing: border-box;
 }

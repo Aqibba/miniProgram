@@ -1,6 +1,8 @@
 {
   "usingComponents": {
-    "q-search": "/componments/search/search",
-    "q-login": "/componments/login/login"
-  }
+    "q-login": "/componments/login/login",
+    "q-card": "/componments/blog-card/card",
+    "q-ctrl": "/componments/commentShare/commentShare"
+  },
+  "enablePullDownRefresh": true
 }

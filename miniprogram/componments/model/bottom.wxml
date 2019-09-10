@@ -3,5 +3,6 @@
     <i class="iconfont icon-shanchu" bindtap="onClose"></i>
     <!-- 插槽 -->
     <slot name="login"></slot>
+    <slot name="model-content"></slot>
   </view>
 </view>

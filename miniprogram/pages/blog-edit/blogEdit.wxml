@@ -17,5 +17,5 @@
 
 <view class="footer" style="bottom:{{bottom}}px">
   <text class="words-num">{{words}}/140</text>
-  <button class="send-btn">发布</button>
+  <button class="send-btn" bindtap="send">发布</button>
 </view>
