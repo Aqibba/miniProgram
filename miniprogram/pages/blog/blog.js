@@ -36,7 +36,7 @@ Page({
   },
 
   agree(e) {
-    // console.log(e)
+    console.log(e)
     const detail = e.detail
     wx.navigateTo({
       url: `../blog-edit/blogEdit?nickName=${detail.nickName}&avatarUrl=${detail.avatarUrl}`,
@@ -81,6 +81,7 @@ Page({
 
   // 跳转说说详情
   comment(e) {
+    console.log(e.target.dataset.blogid)
     wx.navigateTo({
       url: `../../pages/blog-details/blog-details?blogId=${e.target.dataset.blogid}`,
     })
@@ -134,7 +135,12 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
-
+  onShareAppMessage: function (e) {
+    console.log(e)
+    let obj = e.target.dataset.blog
+    return {
+      title: obj.content,
+      path: `/pages/blog-details/blog-details?blogId=${obj._id}`,
+    }
   }
 })

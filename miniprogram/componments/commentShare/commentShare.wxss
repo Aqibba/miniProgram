@@ -59,7 +59,3 @@
 .share-btn::after {
   display: none;
 }
-
-.share-hover::after {
-  border: 0;
-}

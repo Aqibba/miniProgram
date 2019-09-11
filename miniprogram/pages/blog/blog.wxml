@@ -14,12 +14,11 @@
     <block wx:for="{{blogList}}" wx:key="_id">
       <view class="blog-panel">
         <q-card blog="{{item}}" bindtap="comment" data-blogid="{{item._id}}" />
-        <q-ctrl blogId="{{item._id}}" />
+        <!-- 评论和分享 -->
+        <q-ctrl blogId="{{item._id}}" blog="{{item}}"/>
       </view>
     </block>
   </view>
   <!-- 底部弹出层 -->
-  <q-login modelShow="{{modelShow}}" bind:agree="agree" bind:disagree="disagree">
-    
-  </q-login>
+  <q-login modelShow="{{modelShow}}" bind:agree="agree" bind:disagree="disagree" />
 </view>

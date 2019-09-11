@@ -9,7 +9,8 @@ Component({
    * 组件的属性列表
    */
   properties: {
-    blogId: String
+    blogId: String,
+    blog: Object
   },
 
   /**
@@ -31,12 +32,12 @@ Component({
     onComment() {
       wx.getSetting({
         success: (res) => {
-          // console.log(res)
+          console.log(res)
           // 用户已授权
           if (res.authSetting['scope.userInfo']) {
             wx.getUserInfo({
               success: (res) => {
-                // console.log(res)
+                console.log(res)
                 userInfo: res.userInfo
                 // 显示评论框
                 this.setData({
@@ -76,16 +77,18 @@ Component({
     },
 
     // 获取评论的输入
-    onInput(e) {
-      this.setData({
-        content: e.detail.value
-      })
-    },
+    // onInput(e) {
+    //   this.setData({
+    //     content: e.detail.value
+    //   })
+    // },
 
     // 提交评论
-    onSend() {
+    onSend(e) {
+      console.log(e)
       // 将评论插入到数据库
-      let content = this.data.content
+      let formId = e.detail.formId
+      let content = e.detail.value.content
       // 判断评论是否为空
       if (content.trim() == '') {
         wx.showModal({
@@ -118,10 +121,24 @@ Component({
           modelShow: false,
           content: '',
         })
+    
+        // 推送模板消息
+        wx.cloud.callFunction({
+          name: 'sendMsg',
+          data: {
+            content,
+            formId,
+            blogId: this.properties.blogId,
+          }
+        }).then((res) => {
+          console.log(res)
+        }).catch(err => {
+          console.error(err)
+        })
+       
+        // 评论结束，自动刷新
+        this.triggerEvent('refreshCommentList')
       })
-
-
-      // 推送模板消息
     },
   }
 })

@@ -2,6 +2,7 @@
   "component": true,
   "usingComponents": {
     "q-login": "/componments/login/login",
-    "q-model": "/componments/model/bottom"
+    "q-model": "/componments/model/bottom",
+    "q-card": "/componments/blog-card/card"
   }
 }
