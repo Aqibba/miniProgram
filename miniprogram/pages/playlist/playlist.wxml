@@ -6,6 +6,11 @@
     </swiper-item>
   </block>
 </swiper>
+
+<view class="recommend">
+    推荐歌单
+</view>
+<!-- 推荐歌单 -->
 <view class="palylist-container">
 	<block wx:for="{{playlist}}" wx:key="_id">
 		<q-playlist playlist="{{item}}"></q-playlist>
