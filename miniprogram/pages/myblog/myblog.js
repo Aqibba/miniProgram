@@ -1,18 +1,47 @@
 // pages/myblog/myblog.js
+const MAX_LIMIT = 10
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    bloglist: []
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this._getBlog()
+  },
 
+  // 获取曾经发布过的blog
+  _getBlog() {
+    wx.showLoading({
+      title: '玩命加载中...',
+    })
+    wx.cloud.callFunction({
+      name: 'blog',
+      data: {
+        $url: 'getBlog',
+        start: this.data.bloglist.length,
+        count: MAX_LIMIT,
+      }
+    }).then((res) => {
+      console.log(res)
+      this.setData({
+        bloglist: this.data.bloglist.concat(res.result)
+      })
+      wx.hideLoading()
+    })
+  },
+
+  comment(event) {
+    wx.navigateTo({
+      url: `../blog-details/blog-details?blogId=${event.target.dataset.blogid}`,
+    })
   },
 
   /**
@@ -54,7 +83,7 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-
+    this._getBlog()
   },
 
   /**

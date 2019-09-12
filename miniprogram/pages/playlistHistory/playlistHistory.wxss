@@ -1,1 +1,5 @@
-/* pages/playlistHistory/playlistHistory.wxss */
+@import '../../style/iconfont.wxss';
+
+.blog-panel {
+  margin-bottom: 20rpx;
+}

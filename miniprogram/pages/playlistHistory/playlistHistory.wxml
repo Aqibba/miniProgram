@@ -1,2 +1,1 @@
-<!--pages/playlistHistory/playlistHistory.wxml-->
-<text>pages/playlistHistory/playlistHistory.wxml</text>
+<q-musiclist musiclist="{{musiclist}}" />

@@ -1,2 +1,8 @@
-<!--pages/myblog/myblog.wxml-->
-<text>pages/myblog/myblog.wxml</text>
+<view>
+  <block wx:for="{{bloglist}}" wx:key="_id">
+    <view class="blog-panel">
+      <q-card blog="{{item}}" bindtap="comment" data-blogid="{{item._id}}" />
+      <q-ctrl blogId="{{item._id}}" blog="{{item}}" />
+    </view>
+  </block>
+</view>

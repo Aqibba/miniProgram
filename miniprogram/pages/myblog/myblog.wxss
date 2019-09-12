@@ -1,1 +1,5 @@
-/* pages/myblog/myblog.wxss */
+@import '../../style/iconfont.wxss';
+
+.blog-panel {
+  margin-bottom: 20rpx;
+}

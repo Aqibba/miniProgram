@@ -32,7 +32,7 @@ Component({
     onComment() {
       wx.getSetting({
         success: (res) => {
-          console.log(res)
+          // console.log(res)
           // 用户已授权
           if (res.authSetting['scope.userInfo']) {
             wx.getUserInfo({
@@ -85,7 +85,7 @@ Component({
 
     // 提交评论
     onSend(e) {
-      console.log(e)
+      // console.log(e)
       // 将评论插入到数据库
       let formId = e.detail.formId
       let content = e.detail.value.content
@@ -131,7 +131,7 @@ Component({
             blogId: this.properties.blogId,
           }
         }).then((res) => {
-          console.log(res)
+          // console.log(res)
         }).catch(err => {
           console.error(err)
         })

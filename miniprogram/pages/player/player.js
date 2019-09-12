@@ -116,6 +116,8 @@ Page({
         audioManager.singer = music.ar[0].name
         // 歌曲名
         audioManager.epname = music.al.name
+        // 保存进入播放历史
+        this.saveHistory()
       }
 
       // 当播放地址/海报/歌手 全部存在时, 调用isPlaying函数开始播放音乐
@@ -196,6 +198,32 @@ Page({
     }
 
     this._loadMusicDetail(musiclist[nowPlayingIndex].id)
+  },
+
+  // 保存播放的历史记录
+  saveHistory() {
+    // 当前正在播放的歌曲
+    const music = musiclist[nowPlayingIndex]
+
+    const openid = app.globalData.openid
+
+    const history = wx.getStorageSync(openid)
+
+    // 判断当前歌曲是否已经存在
+    let has = false
+    for (let i = 0; i < history.length; i++) {
+      if (history[i].id == music.id) {
+        has = true
+        break
+      } 
+    }
+    if (!has) {
+      history.unshift(music)
+      wx.setStorage({
+        key: openid,
+        data: history,
+      })
+    }
   },
 
   /**

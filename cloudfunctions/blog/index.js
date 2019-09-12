@@ -12,23 +12,23 @@ const blog = db.collection('blog')
 const MAX_LIMIT = 20
 
 // 云函数入口函数
-exports.main = async (event, context) => {
+exports.main = async(event, context) => {
   const app = new tcbRouter({
     event
   })
 
-  app.router('list', async (ctx, next) => {
+  app.router('list', async(ctx, next) => {
     let blogList = await blog.skip(event.start).limit(event.count)
-    .orderBy('createTime', 'desc').get()
-    .then((res) => {
-      return res.data
-    }).catch(err => {
-      console.log(err)
-    })
+      .orderBy('createTime', 'desc').get()
+      .then((res) => {
+        return res.data
+      }).catch(err => {
+        console.log(err)
+      })
     ctx.body = blogList
   })
 
-  app.router('detail', async (ctx, next) => {
+  app.router('detail', async(ctx, next) => {
     let blogId = event.blogId
     // 详情查询
     let detail = await blog.where({
@@ -69,7 +69,15 @@ exports.main = async (event, context) => {
 
   })
 
-
+  const wxContext = cloud.getWXContext()
+  app.router('getBlog', async (ctx, next) => {
+    ctx.body = await blog.where({
+      _openid: wxContext.OPENID
+    }).skip(event.start).limit(event.count)
+      .orderBy('createTime', 'desc').get().then((res) => {
+        return res.data
+      })
+  })
 
   return app.serve()
 }

@@ -1,3 +1,6 @@
 {
-  "usingComponents": {}
+  "usingComponents": {
+    "q-card":"/componments/blog-card/card",
+    "q-ctrl":"/componments/commentShare/commentShare"
+  }
 }

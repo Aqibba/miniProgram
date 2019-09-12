@@ -73,7 +73,7 @@
 				},
 				{
 					"id": -1,
-					"name": "pages/mine/mine",
+					"name": "mine",
 					"pathName": "pages/mine/mine",
 					"query": "",
 					"scene": null
