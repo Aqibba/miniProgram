@@ -33,7 +33,7 @@ exports.main = async (event, context) => {
 		data: []
 	}
 	if (tasks.length > 0) {
-		(await Promise.all(tasks)).reduce((acc, cur) => {
+		list = (await Promise.all(tasks)).reduce((acc, cur) => {
 			return {
 				data: acc.data.concat(cur.data)
 			}
