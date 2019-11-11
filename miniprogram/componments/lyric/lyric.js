@@ -116,10 +116,12 @@ Component({
       for (let i = 0; i < lyricList.length; i++) {
         // 如果进度条前进的时间和当前歌词显示的时间相等或者当前显示歌词的时间，就高亮显示当前歌词
         if (currentTime <= lyricList[i].time) {
-          this.setData({
-            lyricIndex: i - 1,
-            scrollTop: (i - 1) * lyricHeight
-          })
+          if (this.data.lyricIndex != (i - 1)) {
+            this.setData({
+              lyricIndex: i - 1,
+              scrollTop: (i - 1) * lyricHeight
+            })
+          }
           break
         }
       }
